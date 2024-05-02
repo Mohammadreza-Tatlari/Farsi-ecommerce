@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html dir="rtl">
+    <html >
       <body className={`${inter.className} ${dana.className}`}>{children}</body>
     </html>
   );
