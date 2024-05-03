@@ -1,7 +1,9 @@
-import React from 'react'
+import React from "react";
 
-export default function layout({children}:{children: React.ReactNode}) {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>{children}</div>
-  )
+    <div className="h-screen flex justify-center items-center">
+      <div>{children}</div>
+    </div>
+  );
 }

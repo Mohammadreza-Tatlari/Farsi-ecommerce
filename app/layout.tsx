@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 import "./globals.css";
-const inter = Inter({ subsets: ["latin"] });
 
-const dana = localFont({src: '../public/fonts/dana-font/dana regular.ttf'})
+import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
+import ToasterProvider from "./provider/ToasterProvider";
+
+const dana = localFont({ src: "../public/fonts/dana-font/dana regular.ttf" });
 
 export const metadata: Metadata = {
   title: "Customed Ecommerce",
@@ -17,8 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html >
-      <body className={`${inter.className} ${dana.className}`}>{children}</body>
+    <>      
+      <ClerkProvider>
+    <html>
+        <body className={` ${dana.className}`}>
+          <ToasterProvider />
+          <Navbar />
+          {children}
+        </body>
     </html>
+      </ClerkProvider>
+    </>
+
   );
 }
