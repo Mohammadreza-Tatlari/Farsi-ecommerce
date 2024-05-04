@@ -17,6 +17,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { toast } from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -43,6 +44,8 @@ export default function ModalStoreDashboard() {
           const response = await axios.post('/api/stores', values);
           console.log(response.data);
           toast.success("فروشگاه ایجاد شد")
+          //it will do a whole refresh on page for 100% load (welcome to REACT WORLD :) )
+          window.location.assign(`/adminDashboard/${response.data.id}`)
           
         } catch (error) {
           console.log("error from modal ", error);
