@@ -3,6 +3,7 @@ import ModalProvider from '../../provider/ModalProvider'
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation';
 import prismadb from '@/lib/prismadb';
+import DashboardNavbar from '@/components/Admin-Dashboard/DashboardNavbar';
 
 export default async function DashboardLayout({children}:{children:React.ReactNode}) {
   

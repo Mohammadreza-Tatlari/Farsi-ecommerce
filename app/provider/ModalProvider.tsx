@@ -1,6 +1,6 @@
 'use client'
 import Modal from '@/components/Modal';
-import ModalStoreDashboard from '@/components/Modals/ModalStoreDashboard';
+import ModalStoreDashboard from '@/components/Admin-Dashboard/Modals/ModalStoreDashboard';
 import {useEffect , useState} from 'react';
 
 export default function ModalProvider() {

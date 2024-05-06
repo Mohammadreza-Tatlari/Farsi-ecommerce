@@ -24,7 +24,7 @@ export default function RootLayout({
     <html>
         <body className={` ${dana.className}`}>
           <ToasterProvider />
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </body>
     </html>

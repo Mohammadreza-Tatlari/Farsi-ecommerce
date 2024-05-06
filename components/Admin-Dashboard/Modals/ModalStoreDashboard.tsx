@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios'
-import Modal from "../Modal";
+import Modal from "../../Modal";
 import useModalStoreAD from "@/app/hooks/useModalStoreAD";
 import { useForm } from "react-hook-form";
 import {
@@ -13,9 +13,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+} from "../../ui/form";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
 
