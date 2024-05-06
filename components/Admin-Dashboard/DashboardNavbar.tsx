@@ -6,18 +6,19 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 
-export default function DashboardNavbar() {
+export default async function DashboardNavbar() {
   const {userId} = auth()
 
   if(!userId) {
     redirect("/auth/sign-in");
   }
 
-  const stores = prismadb.store.findMany({
+  const stores = await prismadb.store.findMany({
     where: {
       userId
     }
-  })
+  })  
+  
   return (
     <>
       <div className="border-b">

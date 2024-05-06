@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import useModalStoreAD from "@/app/hooks/useModalStoreAD";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { Check, ChevronsDownUpIcon, ChevronsUpDown, ChevronsUpDownIcon, PlusCircle, Store as StoreIcon} from "lucide-react";
+import { Check, ChevronsUpDownIcon, PlusCircle, Store as StoreIcon} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "../ui/command";
 
@@ -16,11 +16,19 @@ interface StoreSwitcherProps extends PopoverTriggerProps{
 }
 
 export default function StoreSwitcher({className , items=[]}:StoreSwitcherProps) {
+  console.log(items , "logged");
+  
   const storeModal = useModalStoreAD();
   const params = useParams();
   const router = useRouter();
 
-  const formattedItems = items.map((item) => ({
+  const formattedItems = items.map((item) => { 
+    return{
+      label: item.name,
+      value: item.id
+    }
+  })
+  items.map((item) => ({
     label: item.name,
     value: item.id
   }));
@@ -30,7 +38,7 @@ export default function StoreSwitcher({className , items=[]}:StoreSwitcherProps)
   
   const onStoreSelect = (store: {value: string , label: string}) => {
     setOpen(false);
-    router.push(`/${store.value}`);
+    router.push(`/adminDashboard/${store.value}`);
   }
   return (
     <>
