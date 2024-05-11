@@ -17,7 +17,6 @@ import {
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { toast } from "react-hot-toast";
-import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -37,7 +36,6 @@ export default function ModalStoreDashboard() {
   const storeModal = useModalStoreAD();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-      console.log("raw va", values);
       
         try {
           setIsLoading(true);

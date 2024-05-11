@@ -1,3 +1,4 @@
+import ModalProvider from "@/app/provider/ModalProvider";
 import DashboardNavbar from "@/components/Admin-Dashboard/DashboardNavbar";
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
@@ -33,6 +34,7 @@ export default async function MainDashboardLayout({
   return (
     <>
       <DashboardNavbar />
+      <ModalProvider />
       {children}
     </>
   );

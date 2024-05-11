@@ -7,7 +7,7 @@ interface useModalStoreADProps{
 }
 
 const useModalStoreAD = create<useModalStoreADProps>((set) => ({
-    isOpen: true,
+    isOpen: false,
     onClose: () => set({isOpen: false}),
     onOpen: () => set({isOpen: true}),
 }))
