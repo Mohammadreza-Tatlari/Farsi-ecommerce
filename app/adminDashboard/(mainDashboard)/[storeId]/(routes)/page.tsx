@@ -16,8 +16,10 @@ export default async function StorePage({params}: StorePageProps) {
 
   return (
     <>
+    <div dir='rtl' className='p-4'>
     <div>store actually exist and you are navigated by really cool routing</div>
     <div>نام این فروشگاه: {storeName} می باشد</div>
+    </div>
     </>
     )
 }

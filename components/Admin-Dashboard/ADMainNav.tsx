@@ -13,9 +13,9 @@ export default function ADMainNav({
 
   const routes = [
     {
-      href: `/${params.storeId}/setting`,
+      href: `/adminDashboard/${params.storeId}/setting`,
       label: "تنظیمات",
-      isActive: pathname === `/${params.storeId}/setting`,
+      isActive: pathname === `/adminDashboard/${params.storeId}/setting`,
     },
   ];
   return (

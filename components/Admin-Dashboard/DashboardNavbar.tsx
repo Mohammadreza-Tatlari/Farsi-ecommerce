@@ -7,31 +7,32 @@ import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 
 export default async function DashboardNavbar() {
-  const {userId} = auth()
+  const { userId } = auth();
 
-  if(!userId) {
+  if (!userId) {
     redirect("/auth/sign-in");
   }
 
   const stores = await prismadb.store.findMany({
     where: {
-      userId
-    }
-  })  
-  
+      userId,
+    },
+  });
+
   return (
     <>
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
-          <div>
-            {/* store needs to be revised */}
-            <StoreSwitcher items={stores} />
+          <div className="mr-auto flex items-center space-x-4">
+            <UserButton afterSignOutUrl="/" />
           </div>
+
           <div>
             <ADMainNav className="mx-6" />
           </div>
-          <div className="ml-auto flex items-center space-x-4">
-            <UserButton afterSignOutUrl="/" />
+          <div>
+            {/* store needs to be revised */}
+            <StoreSwitcher items={stores} />
           </div>
         </div>
       </div>

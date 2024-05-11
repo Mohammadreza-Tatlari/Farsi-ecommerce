@@ -61,7 +61,7 @@ export default function StoreSwitcher({
   };
   return (
     <>
-
+      <div >
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -72,9 +72,9 @@ export default function StoreSwitcher({
             aria-label="انتخاب فروشگاه"
             className={cn("w-[200px] justify-between", className)}
           >
-            <StoreIcon className="mr-2 h-4 w-4" />
+            <ChevronsUpDownIcon className="h-4 w-4 mr-auto shrink-0 opacity-40" />
             {currentStore?.label} 
-            <ChevronsUpDownIcon className="h-4 w-4 ml-auto shrink-0 opacity-40" />
+            <StoreIcon className="ml-2 h-4 w-4" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
@@ -89,16 +89,16 @@ export default function StoreSwitcher({
                     onSelect={() => onStoreSelect(store)}
                     className="text-sm"
                   >
-                    <StoreIcon className="mr-2 h-4 w-4" />
-                    {store.label}
                     <Check
                       className={cn(
-                        "ml-auto h-4 w-4",
+                        "mr-auto h-4 w-4",
                         currentStore?.value === store.value
                           ? "opacity-100"
                           : "opacity-0"
                       )}
                     />
+                    {store.label}
+                    <StoreIcon className="ml-2 h-4 w-4" />
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -112,7 +112,7 @@ export default function StoreSwitcher({
                     storeModal.onOpen();
                   }}
                 >
-                  <PlusCircle className="mr-2 h-4 w-5" />
+                  <PlusCircle className="mr-auto h-4 w-5" />
                   فروشگاه جدید
                 </CommandItem>
               </CommandGroup>
@@ -120,6 +120,7 @@ export default function StoreSwitcher({
           </Command>
         </PopoverContent>
       </Popover>
+      </div>
     </>
   );
 }

@@ -54,7 +54,7 @@ export default function ModalStoreDashboard() {
   }
 
   return (
-    <>
+    <div>
       <Modal
         isOpen={storeModal.isOpen}
         title="ماجول استور"
@@ -105,6 +105,6 @@ export default function ModalStoreDashboard() {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
