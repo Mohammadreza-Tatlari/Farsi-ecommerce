@@ -17,6 +17,11 @@ export default function ADMainNav({
       label: "تنظیمات",
       isActive: pathname === `/adminDashboard/${params.storeId}/setting`,
     },
+    {
+      href: `/adminDashboard/${params.storeId}/`,
+      label: "بررسی",
+      isActive: pathname === `/adminDashboard/${params.storeId}/`,
+    },
   ];
   return (
     <>
@@ -27,7 +32,7 @@ export default function ADMainNav({
           <Link
             href={route.href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
+              "text-sm font-medium transition-colors hover:text-primary underline-offset-4",
               route.isActive ? "text-black " : "text-primary"
             )}
           >
