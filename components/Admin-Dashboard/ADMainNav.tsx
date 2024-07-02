@@ -18,6 +18,11 @@ export default function ADMainNav({
       isActive: pathname === `/adminDashboard/${params.storeId}/setting`,
     },
     {
+      href: `/adminDashboard/${params.storeId}/billboard`,
+      label: "آگهی ها",
+      isActive: pathname === `/adminDashboard/${params.storeId}/billboard`,
+    },
+    {
       href: `/adminDashboard/${params.storeId}/`,
       label: "بررسی",
       isActive: pathname === `/adminDashboard/${params.storeId}/`,
