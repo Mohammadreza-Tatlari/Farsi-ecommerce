@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Store } from '@prisma/client'
+import { Billboard, Store } from '@prisma/client'
 import axios from 'axios'
 import { Trash } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
@@ -18,17 +18,18 @@ import AlertModal from '../Admin-Dashboard/Modals/AlertModal'
 import { ApiALert } from '../ui/api-alert'
 import useOrigin from '@/app/hooks/use-origin'
 
-interface SettingFormProps{
-    receivedData: Store
+interface BillboardFormProps{
+    receivedData: Billboard
 }
 
 const formSchema = z.object({
-  name: z.string().min(1, {message:"نام باید حداقل دارای یک کلمه باشد"}),
+  label: z.string().min(1, {message:"نام باید حداقل دارای یک کلمه باشد"}),
+  imageUrl: z.string().min(1),
 })
 
-type settingFormValues = z.infer<typeof formSchema>;
+type BillboardFormValues = z.infer<typeof formSchema>;
 
-export default function SettingForm({receivedData}: SettingFormProps) {
+export default function BillboardForm({receivedData}: BillboardFormProps) {
 
   const router = useRouter()
   const params = useParams()
@@ -36,12 +37,12 @@ export default function SettingForm({receivedData}: SettingFormProps) {
   const [isLoading , SetLoading] = useState<boolean>(false)
   const createdOrigin = useOrigin()
 
-  const form = useForm<settingFormValues>({
+  const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: receivedData,
+    defaultValues: receivedData || {label: '', imageUrl: ''}
   })
 
-  async function onSubmit(data: settingFormValues){
+  async function onSubmit(data: BillboardFormValues){
     try {
       SetLoading(true)
       await axios.patch(`/api/stores/${params.storeId}` , data)
@@ -98,7 +99,7 @@ export default function SettingForm({receivedData}: SettingFormProps) {
       <div className='grid grid-cols-3 gap-8'>
       <FormField 
       control={form.control}
-      name='name'
+      label='name'
       render={({field}) => (
         <FormItem>
           <FormLabel>
