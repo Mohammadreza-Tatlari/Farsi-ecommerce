@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Billboard, Store } from '@prisma/client'
+import { Billboard } from '@prisma/client'
 import axios from 'axios'
 import { Trash } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
@@ -15,16 +15,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input'
 import { Separator } from '../ui/separator'
 import AlertModal from '../Admin-Dashboard/Modals/AlertModal'
-import { ApiALert } from '../ui/api-alert'
 import useOrigin from '@/app/hooks/use-origin'
 
 interface BillboardFormProps{
-    receivedData: Billboard
+    receivedData: Billboard | null
 }
 
 const formSchema = z.object({
   label: z.string().min(1, {message:"نام باید حداقل دارای یک کلمه باشد"}),
-  imageUrl: z.string().min(1),
+  imageUrl: z.string().min(1 , {message: "عکس دارای لینک حصیح نمی باشد"}),
 })
 
 type BillboardFormValues = z.infer<typeof formSchema>;
@@ -36,6 +35,12 @@ export default function BillboardForm({receivedData}: BillboardFormProps) {
   const [isOpen, setOpen ] = useState<boolean>(false)
   const [isLoading , SetLoading] = useState<boolean>(false)
   const createdOrigin = useOrigin()
+
+
+  const title = receivedData ? "ویرایش آگهی" : "ایجاد آگهی جدید";
+  const description = receivedData ? "برای ویرایش اطلاعات آگهی" : "برای ایجاد یک آگهی جدید";
+  const toastMessage = receivedData ? "آگهی بروزرسانی شد" : "آگهی ایجاد شد";
+  const action = receivedData ? "ویرایش" : "ساخت آگهی";
 
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
@@ -82,24 +87,24 @@ export default function BillboardForm({receivedData}: BillboardFormProps) {
   return (
     <>
     <AlertModal loading={isLoading} onClose={onClose} onConfirm={onDelete} isOpen={isOpen}/>
-    
-    <div className='flex items-center justify-between'>
+    <div className='flex p-2 items-center justify-between'>
         <Heading
-        title="تنظیمات"
-        description='مدیریت و تنظیم فروشگاه'/>
+        title={title}
+        description={description}/>
+        {receivedData && 
         <Button variant="destructive"
         size='icon'
         onClick={onConfirm}>
             <Trash className='h-4 w-4'/>
-        </Button>
+        </Button>}
     </div>
     <Separator />   
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full'>
+    <form  onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full'>
       <div className='grid grid-cols-3 gap-8'>
       <FormField 
       control={form.control}
-      label='name'
+      name='label'
       render={({field}) => (
         <FormItem>
           <FormLabel>
@@ -113,11 +118,10 @@ export default function BillboardForm({receivedData}: BillboardFormProps) {
       )}
       />
       </div>
-      <Button disabled={isLoading} className='ml-auto' type='submit'> دخیره تغییرات</Button>
+      <Button disabled={isLoading} className='ml-auto' type='submit'> {action}</Button>
     </form>
     </Form>
     <Separator />
-    <ApiALert title='NEXT_PUBLIC_API_URL' description={`${createdOrigin}/api/${params.storeId}`} variant='public'/>
     </>
   )
 }

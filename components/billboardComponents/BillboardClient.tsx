@@ -12,8 +12,8 @@ export default function BillboardClient() {
   const params = useParams()
   return (
     <>
-    <div className='flex items-center justify-between'>
-        <Heading 
+    <div dir='rtl' className='flex items-center justify-between'>
+        <Heading
         title='آگهی ها (0)'
         description='مدیریت آگهی های داخل فروشگاه'/>
         <Button onClick={() => {router.push(`/adminDashboard/${params.storeId}/billboard/new`)}}>

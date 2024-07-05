@@ -10,7 +10,9 @@ export default async function BillboardPageId({params}: {params:{billboardId: st
     })
   return (
     <>
+    <div dir="rtl" className="p-4 space-y-3">
     <BillboardForm receivedData={billboard}/>
+    </div>
     </>
   )
 }
